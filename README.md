@@ -62,6 +62,7 @@ mpirun -np <num_processes> ./<output_file>
 Example:
 
 Run in bash
+
 mpirun -np 4 ./monte_pi
 
 📄 Brief Description of Each Program
@@ -122,3 +123,124 @@ Master-slave approach:
 Master distributes numbers.
 Slaves test numbers and send results back.
 Uses MPI_ANY_SOURCE.
+
+13.Task sum threads
+
+# CUDA Program: Threads Performing Different Tasks
+
+This CUDA program demonstrates how **individual GPU threads can be assigned different computational tasks**. In this example, we perform **two methods to calculate the sum of the first `N` integers (N = 1024)**.
+
+---
+
+## 🎯 Objective
+
+The program launches **2 threads**:
+
+- **Thread 0**: Calculates the sum of the first `N` integers using an **iterative approach**.
+
+- **Thread 1**: Calculates the sum using the **mathematical formula**:  
+  \[
+  \text{Sum} = \frac{N(N + 1)}{2}
+  \]
+
+---
+
+## 🔧 Files
+
+| File Name         | Description                              |
+|------------------|------------------------------------------|
+| `cuda_sum_tasks.cu` | CUDA source file where threads do separate work |
+
+---
+
+## 📦 Requirements
+
+To run this code, you need:
+
+- A system with **NVIDIA GPU** and **CUDA toolkit** installed  
+
+- Or use **Google Colab** with GPU enabled
+
+---
+
+## 🚀 How to Run in Google Colab
+
+### 1. Make sure GPU is enabled:
+
+`Runtime` > `Change runtime type` > Set **Hardware Accelerator** to `GPU`
+
+### 2. Save the CUDA code
+
+```cpp
+%%writefile cuda_sum_tasks.cu
+
+// Paste the CUDA code here
+
+Compile and Run
+
+!nvcc cuda_sum_tasks.cu -o cuda_sum_tasks
+
+!./cuda_sum_tasks
+
+14.Mergesort
+
+# CUDA Bitonic Sort
+
+This project implements **Bitonic Sort** using CUDA. Bitonic sort is a parallel sorting algorithm ideal for GPU computation due to its predictable memory access and computation patterns.
+
+---
+
+## 🔧 Files
+
+| File Name         | Description                            |
+|------------------|----------------------------------------|
+| `bitonic_sort.cu` | CUDA implementation of Bitonic sort   |
+
+---
+
+## 📌 Requirements
+
+- NVIDIA GPU with CUDA support
+
+- CUDA Toolkit installed  
+
+OR  
+
+- Use **Google Colab** with GPU enabled
+
+---
+
+## ⚙️ How It Works
+
+- Sorts an array of integers using the **Bitonic Sorting Network**.
+
+- Uses nested CUDA kernel launches to perform bitonic merges and sorting stages.
+
+- Measures and prints execution time using `std::chrono`.
+
+---
+
+## 📥 How to Run (Google Colab)
+
+### 1. Enable GPU in Colab
+
+> Go to `Runtime` → `Change runtime type` → Set **Hardware accelerator** to `GPU`
+
+---
+
+### 2. Save the Code
+
+Paste the code in a Colab cell with:
+
+```cpp
+
+%%writefile bitonic_sort.cu
+
+// [ Paste your CUDA Bitonic sort code here ]
+
+Compile and Run
+
+!nvcc -O3 bitonic_sort.cu -o bitonic_sort
+
+!./bitonic_sort
+
